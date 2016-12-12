@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Untitled Document</title>
+<link rel="stylesheet" href="/webkit_ui/service.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script type="text/javascript">
+	function closeDiv(id) {
+		document.getElementById(id).style.display = 'none';
+	}
+</script>
+</head>
+
+
+<body bgcolor="#FFFFFF" text="#000000">
+ <table border=1 cellpadding=0 cellspacing=0 width="50%" bordercolor="#006699" bordercolorlight="#006699" bordercolordark="#FFFFFF" align="center">
+	<tr bgcolor="#063b71" >
+		<td nowrap class="titletype" align="center" width="100%" height="28" valigh="middle">管理员登录信息</td>
+	</tr>
+  <tr bgcolor="#ffffee">
+    <td nowrap class="content" width="100%" height="100" valign="middle" align="center">
+      <table width="100%" border="0" cellspacing="2" cellpadding="2">
+        <tr> 
+          <td width="38%" align="right" bgcolor="#bacfe4" class="inputtype">所在节点：</td>
+          <td bgcolor="#d1e3f5" class="inputtype">金华</td>
+        </tr>
+        <tr> 
+          <td width="38%" align="right" bgcolor="#bacfe4" class="inputtype">工作部门：</td>
+          <td bgcolor="#d1e3f5" class="inputtype">婺城</td>
+        </tr>
+        <tr> 
+          <td width="38%" align="right" bgcolor="#bacfe4" class="inputtype">管理员姓名：</td>
+          <td bgcolor="#d1e3f5" class="inputtype">wuchfj</td>
+        </tr>
+        <tr>
+          <td width="38%" align="right" bgcolor="#bacfe4" class="inputtype">登录名称：</td>
+          <td bgcolor="#d1e3f5" class="inputtype">wuchfj</td>
+        </tr>
+        <tr>
+          <td width="38%" align="right" bgcolor="#bacfe4" class="inputtype">上次登录时间：</td>
+          <td bgcolor="#d1e3f5" class="inputtype">2016-12-8 13:40:41</td>
+        </tr>
+      </table>
+
+</table>
+</body>
+<script type="text/javascript">
+parent.leftFrame.location.reload();
+parent.topFrame.location.reload();
+</Script>
+</html>

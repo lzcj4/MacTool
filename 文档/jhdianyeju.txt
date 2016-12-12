@@ -1,0 +1,97 @@
+
+
+
+
+
+<html>
+<head>
+<title>用户查询结果列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<link rel="stylesheet" href="/webkit_ui/service.css" type="text/css">
+<Script Language="JavaScript">
+
+	function selectAccount(poid,login,region) {
+	    loginIndex=login.indexOf("@");
+	    if (loginIndex<0) loginIndex=login.length;
+	    login=login.substring(0,loginIndex);
+	    opener.document.forms["form1"]["login"].value   = login;
+	    opener.document.forms["form1"]["login2"].value  = login;
+	    opener.document.forms["form1"]["poid"].value    = poid;
+	    opener.document.forms["form1"]["region"].value    = region;
+	    self.close();
+	}
+
+</Script>
+
+<link rel="stylesheet" href="/webkit_ui/selfservice.css" type="text/css">      
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+    
+  <form name="form1" method="post" action="pubAcntQueryRes.jsp">
+  <input type="hidden" name="listSrv" value="no">
+  <table border=1 cellpadding=0 cellspacing=0 width="300" bordercolor="#006699" bordercolorlight="#006699" bordercolordark="#FFFFFF">
+
+    <tr>
+      <td align="right" class="inputtype">共1则查询结果。   现显示1至1则。  1/1页
+      </td>
+    </tr>
+  <tr>
+    <td>
+  <table width="520" border="0" cellspacing="3" cellpadding="3">
+    <tr bgcolor="#063b71">
+    
+      <td nowrap class="titletype">节点</td>
+      <td nowrap class="titletype">受理编号</td>
+    
+      <td nowrap class="titletype">客户名称</td>
+      <td nowrap class="titletype">登录名称</td>
+      <td nowrap class="titletype">类型</td>
+      <td nowrap class="titletype">状态</td>
+      <td nowrap class="titletype">开户时间</td>
+    </tr>
+
+    <tr bgcolor="#bacfe4">
+    
+      <td class="inputtype">金华</td>
+      <td class="inputtype">309440306e</td>
+    
+      <td class="inputtype">
+      
+      <a href="/servlet/com.portal.web.PInfranetServlet?page=biz/acntDetail&Component=com.hp.web.comp.PGetAccountInfoBeanImpl&accountno=218757027&login=057900668955&from=other">金华电业局</a>
+      
+      </td>
+      <td class="inputtype">057900668955@zj</td>
+      <td class="inputtype">个人</td>
+      <td class="inputtype">正常</td>
+      <td class="inputtype">2010-3-16</td>
+    </tr>
+    
+    <input type="hidden" name="listSrv" value="no">
+    <input type="hidden" name="acntManagement" value="yes">
+    
+    <input type="hidden" name="firstname" value="">
+    <input type="hidden" name="region" value="57901">
+    <input type="hidden" name="custidlocal" value="">
+    <input type="hidden" name="accountstatus" value="">
+    <input type="hidden" name="page" value="1">
+    <input type="hidden" name="relation" value="equal">
+    <input type="hidden" name="login" value="057900668955">
+    <input type="hidden" name="loginrelation" value="equal">
+    <input type="hidden" name="service" value="">
+    <input type="hidden" name="servicestatus" value="">
+    <tr bgcolor="#bacfe4" >
+      <td colspan=7 class="buttontype" align="center" height="34" valign="middle">
+    
+    
+      </td>
+    </tr>
+  </table>
+  </td>
+</tr>
+</table>
+<input name="xtoken" type="hidden" value="p+8/zs4HI0Qxe87LEfh4wxL2k/oOKRmmR9WSnjk1E5uBhnLarmYKgedGH7A0BZeMtcKKnP59VpT5j4OGIWx+wA=="/>
+</form>
+</body>
+
+</html>

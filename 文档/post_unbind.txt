@@ -1,0 +1,33 @@
+HTTP/1.1 200 OK
+Date: Thu, 08 Dec 2016 06:17:04 GMT
+Content-Length: 862
+Content-Type: text/html;charset=GBK
+X-Frame-Options: SAMEORIGIN
+
+
+
+
+
+
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+</head>
+<body>
+<form name="form1" action="/servlet/com.portal.web.PInfranetServlet" method="post">
+<input type="hidden" name="homeid1" value=57900>
+<input type="hidden" name="homeid2" value=57901>
+<input type="hidden" name="page" value="biz/acntModifyServiceGreen">
+<input type="hidden" name="loginname" value=057900668955@zj>
+<input type="hidden" name="localid" value=309440306e>
+<input type="hidden" name="Component" value="com.hp.web.comp.PModifyServiceInfoBeanImpl">
+<input type="hidden" name="loadBean" value="yes">
+<input name="xtoken" type="hidden" value="p+8/zs4HI0Qxe87LEfh4wxL2k/oOKRmmR9WSnjk1E5uBhnLarmYKgedGH7A0BZeMtcKKnP59VpT5j4OGIWx+wA=="/>
+</form>
+<script language="javascript">
+document.forms[0].submit();
+</script>
+</body>
+</html>

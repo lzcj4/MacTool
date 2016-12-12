@@ -1,0 +1,63 @@
+
+<html>
+<head>
+<title>综合业务管理系统</title>
+      <HEAD>
+         <META Http-equiv="content-type" Content="text/html;charset=GBK">
+         <TITLE>Infranet</TITLE>
+        <link rel="stylesheet" href="/webkit_ui/service.css" type="text/css">
+      </HEAD>
+
+</head>
+<body bgcolor="#FFFFFF" text="#000000" leftmargin="0" topmargin="0">
+<table width="240" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><img src="images/main_title_1.jpg" width="800" height="86"></td>
+  </tr>
+  <tr>
+    <td>
+      
+      <table width="800" border="0" cellspacing="0" cellpadding="0" background="images/main_title_2.jpg" height="25">
+       
+        <tr align="center" valign="middle"> 
+          <td width="400">&nbsp;</td>
+          <td width="132" class="p9"><a href="/webkit_ui/csr/ChangeCsr.jsp" target="mainFrame">转换节点</a></td>
+          <td width="132" class="p9"><a href="/webkit_ui/csr/ChangePswd.jsp" target="mainFrame">修改密码</a></td>
+          <td width="132" class="p9"><a href="#nogo" onclick="javascript:return check()">退出登录</a></td>
+        </tr>
+        
+      </table>
+     
+    </td>
+  </tr>
+  <tr>
+  	<td>
+  		<table width="800" border="0" cellspacing="0" cellpadding="0" height="38">
+  		  <tr>
+  		  	<td width="190" bgcolor="#063b71">&nbsp;</td>
+    		<td width="610"><img src="images/main_title_4.jpg" width="610" height="37"></td>
+  		  </tr>  		  
+		</table>
+  	</td>
+  </tr>
+</table>
+
+<form id="quit" action="/servlet/KillCSRSession" method="post">
+<input name="xtoken" type="hidden" value="p+8/zs4HI0Qxe87LEfh4wxL2k/oOKRmmR9WSnjk1E5uBhnLarmYKgedGH7A0BZeMtcKKnP59VpT5j4OGIWx+wA=="/>
+</form>
+
+</body>
+</html>
+
+<script type="text/javascript">
+<!--
+function check(){
+  if(window.confirm("你确定要离开管理界面么?")){
+	  document.getElementById('quit').submit();
+    	return true;
+   }else{
+      	return false;
+   }
+}
+//-->
+</script>

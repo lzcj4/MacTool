@@ -1,0 +1,28 @@
+HTTP/1.1 200 OK
+Date: Thu, 08 Dec 2016 06:17:05 GMT
+Content-Type: text/html;charset=GBK
+X-Frame-Options: SAMEORIGIN
+X-Frame-Options: SAMEORIGIN
+Vary: Accept-Language
+Content-Language: en
+Content-Length: 283
+
+
+
+
+
+
+
+
+<html>
+<head>
+
+<script type="text/javascript">
+	alert('成功修改服务属性');
+</script>
+
+<meta http-equiv="refresh" content="0; url=/webkit_ui/biz/acntModifyServiceRes.jsp"/>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+</head>
+</html>

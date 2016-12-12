@@ -1,0 +1,256 @@
+
+
+
+<html>
+<head>
+<title>客户详细信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+<link rel="stylesheet" href="/webkit_ui/service.css" type="text/css">
+<link rel="stylesheet" href="/webkit_ui/selfservice.css" type="text/css">
+
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<table border=1 cellpadding=0 cellspacing=0 width="80%"
+	bordercolor="#006699" bordercolorlight="#006699"
+	bordercolordark="#FFFFFF" align="center">
+	<tr bgcolor="#063b71">
+		<td nowrap class="titletype" align="center" width="100%" height="28"
+			valigh="middle">客户详细信息</td>
+	</tr>
+	<tr>
+		<td>
+		<table width="100%" border="0" cellpadding="0" class="tab">
+			<tr>
+				<td bgcolor="#bacfe4" align="right" width="20%">受理编号</td>
+				<td bgcolor="#d1e3f5" width="30%">309440306e</td>
+				<td align="right" bgcolor="#bacfe4" width="20%">所在节点</td>
+				<td bgcolor="#d1e3f5" width="30%">金华</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" width="20%">外部标识</td>
+				<td bgcolor="#d1e3f5" width="30%"></td>
+				<td align="right" bgcolor="#bacfe4" width="20%">出帐方式</td>
+				<td bgcolor="#d1e3f5" width="30%">账单出账</td>
+			</tr>
+					
+			
+			<tr>
+				<td bgcolor="#bacfe4" align="right">付费类型</td>
+				<td bgcolor="#d1e3f5">后付费&nbsp;</td>              	
+				<td bgcolor="#bacfe4" align="right">计费类型</td>
+				<td bgcolor="#d1e3f5">包月</td>
+			</tr>
+			
+			<tr>
+				<td align="right" bgcolor="#bacfe4" width="20%">帐户状态</td>
+				<td bgcolor="#d1e3f5" width="30%">正常</td>
+				<td bgcolor="#bacfe4" align="right" width="20%">锁户类型</td>
+				<td bgcolor="#d1e3f5" width="30%">正常</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4">安装号</td>
+				<td bgcolor="#d1e3f5"></td>
+				
+			    <td align="right" bgcolor="#bacfe4" class="inputtype">我的E家</td>
+			    <td bgcolor="#d1e3f5">非我的E家用户</td>
+			</tr>
+			
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype">统一账号标记</td>
+			    <td bgcolor="#d1e3f5" >非统一账号</td>
+				<td bgcolor="#d1e3f5" colspan="2" >
+				<table style="width:100%" class="tab">
+				<tr>
+				<td bgcolor="#bacfe4" class="inputtype" style="text-align:right">是否推送欠费信息
+				</td>
+				<td bgcolor="#d1e3f5" style="text-align:left">
+				否
+				</td>
+				
+				</tr>
+				</table>
+				</td>
+			</tr>
+			<tr>
+				<td width="100%" align="center" colspan="4" valign="top">
+				<form name="acntForm" method="post" action="">
+				<table border="0" width="100%" class="tab">
+					<tr bgcolor="#063b71">
+						<td nowrap class="titletype" align="center" width="100%"
+							height="28" valigh="middle" colspan="4">客户信息</td>
+					</tr>
+					<tr>
+						<td align="right" bgcolor="#bacfe4">客户姓名</td>
+						<td bgcolor="#d1e3f5">金华电业局</td>
+						<td align="right" bgcolor="#bacfe4">用户类型</td>
+						<td bgcolor="#d1e3f5">个人</td>
+					</tr>
+					<tr>
+						<td bgcolor="#bacfe4" align="right">证件名称</td>
+						<td bgcolor="#d1e3f5">身份证</td>
+						<td align="right" bgcolor="#bacfe4">证件号码</td>
+						<td bgcolor="#d1e3f5"></td>
+					</tr>
+					<tr>
+						<td align="right" bgcolor="#bacfe4">客户地址&nbsp;</td>
+						<td colspan="3" bgcolor="#d1e3f5">&nbsp;</td>
+					</tr>
+					<tr>
+						<td align="right" bgcolor="#bacfe4">单位类型</td>
+						<td bgcolor="#d1e3f5"></td>
+						<td align="right" bgcolor="#bacfe4">托收电话</td>
+						<td bgcolor="#d1e3f5">&nbsp;</td>
+					</tr>
+					<tr>
+						<td align="right" bgcolor="#bacfe4">单位名称</td>
+						<td colspan="3" bgcolor="#d1e3f5"></td>
+					</tr>
+					<tr>
+						<td align="right" bgcolor="#bacfe4">职业</td>
+						<td bgcolor="#d1e3f5">其它</td>
+						<td bgcolor="#bacfe4" align="right">国籍</td>
+						<td bgcolor="#d1e3f5"></td>
+					</tr>
+					<tr bgcolor="#063b71">
+						<td nowrap class="titletype" align="center" width="100%"
+							height="28" valigh="middle" colspan="4">联系信息</td>
+					</tr>
+					<tr>
+						<td bgcolor="#bacfe4" align="right">联系人</td>
+						<td bgcolor="#d1e3f5">金华电业局</td>
+						<td bgcolor="#bacfe4" align="right">性别</td>
+						<td bgcolor="#d1e3f5">男
+</td>
+					</tr>
+					<tr>
+						<td bgcolor="#bacfe4" align="right">联系地址</td>
+						<td colspan="3" bgcolor="#d1e3f5">浙江省金华市金华市, 月亮湾22幢2单元1楼</td>
+					</tr>
+					<tr>
+						<td bgcolor="#bacfe4" align="right">邮政编码</td>
+						<td bgcolor="#d1e3f5" colspan="3">-</td>
+					</tr>
+					<tr>
+						<td bgcolor="#bacfe4" align="right">E-Mail</td>
+						<td bgcolor="#d1e3f5" colspan="3"></td>
+					</tr>
+					<tr>
+						<td bgcolor="#bacfe4" align="right">联系电话</td>
+						<td bgcolor="#d1e3f5" colspan="3"></td>
+					</tr>
+					<tr>
+						<td bgcolor="#bacfe4" align="right">传真</td>
+						<td bgcolor="#d1e3f5" colspan="3"></td>
+					</tr>
+					<tr bgcolor="#063b71">
+						<td nowrap class="titletype" align="center" width="100%"
+							height="28" valigh="middle" colspan="4">管理操作</td>
+					</tr>
+					
+					<tr>
+						<td bgcolor="#bacfe4" align="right">客户管理</td>
+						<td bgcolor="#d1e3f5" colspan="3"><!--修改信息--> 
+						
+						<a href="/webkit_ui/biz/acntModify.jsp">修改信息</a>
+						
+						<!-- add by daijunfu 2003-8-12 to support sub account-->  <a
+							href="/servlet/com.portal.web.PInfranetServlet?page=biz/subAcntList&Component=com.hp.web.comp.PGetGroupInfoBeanImpl&accountno=218757027&accountbandwidth=8192">子帐号管理</a>
+
+						
+					</tr>
+					
+					<tr>
+						<td bgcolor="#bacfe4" align="right">服务受理</td>
+						<td bgcolor="#d1e3f5" colspan="3">
+						
+						<a href="../webkit_ui/biz/acntModifyPar.jsp">修改服务参数</a>
+						</td>
+					</tr>
+					
+					
+					<tr>
+						<td bgcolor="#bacfe4" align="right">日志管理</td>
+						<td bgcolor="#d1e3f5" colspan="3"><a
+							href="/webkit_ui/log/Searchlog.jsp?poid=218757027&loginname=057900668955@zj&regionId=57901">交易日志查询</a>
+						</td>
+					</tr>
+					
+					<tr>
+						<td bgcolor="#bacfe4" align="right">帐务查询</td>
+						<td bgcolor="#d1e3f5" colspan="3">
+						
+						<a
+							href="/webkit_ui/bill/billQuery.jsp?poid=218757027&type=1">帐单查询</a>
+						
+						<a
+							href="/webkit_ui/bill/srvBillQuery.jsp?poid=218757027&type=1">详单查询</a>
+							</td>
+					</tr>
+					
+				</table>
+				<input name="xtoken" type="hidden" value="p+8/zs4HI0Qxe87LEfh4wxL2k/oOKRmmR9WSnjk1E5uBhnLarmYKgedGH7A0BZeMtcKKnP59VpT5j4OGIWx+wA=="/>
+				</form>
+				</td>
+			</tr>
+			<tr>
+				<td width="100%" align="center" colspan="4" valign="top">
+				<form name="acntForm" method="post" action="">
+				<table Border="0" Width="100%" class="tab">
+					<tr bgcolor="#063b71">
+						<td nowrap class="titletype" align="center" width="100%"
+							height="28" valigh="middle" colspan=7>服务信息</td>
+					</tr>
+					<tr>
+						<td Align="left" bgcolor="#bacfe4" Valign="top" width="10%">服务类型</td>
+						<td Align="left" bgcolor="#bacfe4" Valign="top" width="10%">登录名</td>
+						<td Align="left" bgcolor="#bacfe4" Valign="top" width="10%">计费方式</td>
+						<td Align="left" bgcolor="#bacfe4" Valign="top" width="10%">服务状态</td>
+						<td Align="left" bgcolor="#bacfe4" Valign="top" width="30%">业务产品</td>
+
+						<!--added By ZhangXuewei on 2004-12-29-->
+						<td Align="left" bgcolor="#bacfe4" Valign="top" width="10%">速率</td>
+						<!--added By ZhangXuewei on 2004-12-29-->
+
+						<td Align="left" bgcolor="#bacfe4" Valign="top" width="20%">服务操作</td>
+					</tr>
+					
+					
+					<tr>
+						<td bgcolor="#d1e3f5" width="10%"><a
+							href="/servlet/com.portal.web.PInfranetServlet?page=biz/acntModifyService&Component=com.hp.web.comp.PFindServiceTemplateImpl&item=0&Login=057900668955%40zj&Name=pppoe&Status=10100&dealname=ZJ_FTTH_TYZQ_8M_10s_Trade_Std&Flag=0&from=2&homeid2=57901">宽带拨号&nbsp;</a></td>
+						<td bgcolor="#d1e3f5" width="12%">057900668955
+&nbsp;</td>
+						<td bgcolor="#d1e3f5" width="10%">普通&nbsp;</td>
+						<td bgcolor="#d1e3f5" width="10%">正常&nbsp;</td>
+						<td bgcolor="#d1e3f5" width="28%">浙江省，天翼政企宽带，FTTH，8M，光速标准版，带宽共享&nbsp;</td>
+
+						<!--added By ZhangXuewei on 2004-12-29-->
+						<td bgcolor="#d1e3f5" width="10%">8192K&nbsp;</td>
+						<!--added By ZhangXuewei on 2004-12-29-->
+
+						<td bgcolor="#d1e3f5" width="30%">
+						
+						<a href="/webkit_ui/biz/acntProbe.jsp?accountID=218757027&servicename=pppoe&login=057900668955%40zj&serviceid=218757475&status=10100&dealname=ZJ_FTTH_TYZQ_8M_10s_Trade_Std&node=57901">上网诊断</a>&nbsp;<br>
+						
+						<a href="/webkit_ui/biz/srvChgPwd.jsp?Item=0">修改静态密码</a><br>
+						
+						<br/>
+						
+						
+						</td>
+						</td>
+					</tr>
+					
+				</table>
+				<input name="xtoken" type="hidden" value="p+8/zs4HI0Qxe87LEfh4wxL2k/oOKRmmR9WSnjk1E5uBhnLarmYKgedGH7A0BZeMtcKKnP59VpT5j4OGIWx+wA=="/>
+				</form>
+				</td>
+			</tr>
+			</td>
+			</tr>
+		</table>
+</body>
+</html>

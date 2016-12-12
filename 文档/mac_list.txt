@@ -1,0 +1,1310 @@
+
+
+<html>
+<head>
+<title>修改服务</title>
+<link rel="stylesheet" href="/webkit_ui/service.css" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<script language="javascript">
+var count = 0;
+function alltrim(sstr)
+{
+var astr="";
+var dstr="";
+var flag=0;
+for (i=0;i<sstr.length;i++)
+{if (((sstr.charAt(i)!=' ')&&(sstr.charAt(i)!='　'))||(flag!=0))
+{dstr+=sstr.charAt(i);
+flag=1;
+}
+}
+flag=0;
+for (i=dstr.length-1;i>=0;i--)
+{if (((dstr.charAt(i)!=' ')&&(sstr.charAt(i)!='　'))||(flag!=0))
+{astr+=dstr.charAt(i);
+flag=1;
+}
+}
+dstr="";
+for (i=astr.length-1;i>=0;i--) dstr+=astr.charAt(i);
+return dstr;
+}
+
+
+function  add_xvc(maxnum,xvcNum) {
+	var optionvalue = 0;
+	for(var i = 0;i < document.getElementById('xvccontrol').options.length; i++) {  
+    	if(document.getElementById('xvccontrol').options[i].selected  ==  true){
+    		optionvalue = document.getElementById('xvccontrol').options[i].value;
+    	}
+	}
+	if(xvcNum>=1 && optionvalue==1) {
+		alert('手工绑定只允许绑定一条XVC参数');
+		return false;
+	}
+	if(xvcNum>=2 && optionvalue==4) {
+		alert('手工移动绑定至多允许绑定2条XVC参数');
+		return false;
+	}
+    var addwindow;
+    var parentid = 57900;
+    addwindow=window.open("../webkit_ui/biz/acntAddPvc.jsp?itemno="+maxnum+"&parent_id="+parentid,"add_xvc","toolbar=0,menubar=0,scrollbars=0,resizable=0,width=500,height=400");
+    addwindow.opener=window;
+}
+
+//added by huanghe on 5/15/2007 用户自定义返回属性
+function  add_attr(ctgname) {
+    var addwindow;
+    var parentid = 57900;
+    addwindow=window.open("../webkit_ui/biz/acntAddAttr.jsp?category="+ctgname+"&parent_id="+parentid,"add_attr","toolbar=0,menubar=0,scrollbars=0,resizable=0,width=500,height=400");
+    addwindow.opener=window;
+}
+//added by huanghe on 5/15/2007 ended
+
+
+function  add_mac(maxnum) {
+    var addwindow;
+    
+	
+    addwindow=window.open("../webkit_ui/biz/acntAddMac.jsp?itemno="+maxnum,"add_mac","toolbar=0,menubar=0,scrollbars=0,resizable=0,width=500,height=400");
+    addwindow.opener=window;
+}
+
+function add_hotspot() {
+    var addwindow;
+    addwindow=window.open("../webkit_ui/biz/acntAddHotspot.jsp","add_hotspot","toolbar=0,menubar=0,scrollbars=0,resizable=0,width=500,height=400");
+    addwindow.opener=window;
+}
+
+function querydevice() {
+    var addwindow;
+    addwindow=window.open("../webkit_ui/leaselan/AccessDeviceQuery.jsp?","querydevice","toolbar=0,menubar=0,scrollbars=0,resizable=0,width=500,height=400");
+    addwindow.opener=window;
+}
+function check() {
+	//added by huanghe on 5/15/2007 用户自定义返回属性
+	if(document.getElementById("extattr.iptv.RB-Qos-Reference") !=undefined && alltrim(document.getElementById("extattr.iptv.RB-Qos-Reference").value).length > 1023) {
+            alert("IPTV自定义返回属性值超长,最多1023字节!");
+            document.getElementById("extattr.iptv.RB-Qos-Reference").focus();
+            return false;
+        }
+    if(document.getElementById("extattr.iptv.RB-Qos-Reference") !=undefined && alltrim(document.getElementById("extattr.iptv.RB-Qos-Reference").value).length <= 0) {
+            alert("IPTV自定义返回属性值不能为空!");
+            document.getElementById("extattr.iptv.RB-Qos-Reference").focus();
+            return false;
+        }
+	
+	if(document.modifyservice.macmax !=undefined && isNaN(document.modifyservice.macmax.value)) {
+            alert("MAC绑定最大值请输入数字");
+            document.modifyservice.macmax.focus();
+            return false;
+        }
+    if(document.modifyservice.macmax !=undefined && (document.modifyservice.macmax.value < 0 || document.modifyservice.macmax.value > 128)) {
+	alert("MAC绑定最大值不在允许范围内!(大于0,小于128)");
+	document.modifyservice.macmax.focus();
+	return false;
+    }
+    
+    
+     //分别检查各种会话的数值格式。
+    //prohibite session from being changed to -1.
+    //Modified by luo wu-hua  on 2008/08/19.
+     
+    //add by huanghe on 10/10/2006
+    if(document.getElementById('xvccontrol') !=undefined){
+    	var optionvalue = document.getElementById('xvccontrol').value;
+		if(optionvalue == '' && 1 == '1'){
+			alert('请选择绑定方式');
+			return false;
+		}
+    	if("pppoe"=="pppoe" && "2" != optionvalue && 1 == 1 && (optionvalue == "0" || optionvalue == "2")){
+    		if(!confirm("切换到不绑定或者自动绑定状态将清空XVC绑定列表！")){
+    			return false; 
+    		}
+    	}	
+    }
+    
+	
+	//added by shenwei 2005-07-14
+	//if it is a normal user who has no vpdn template, vpdn must be selected 
+    if (document.modifyservice.vpdninfoid && document.modifyservice.vpdninfoid.value == '-1000'){
+ 		alert("请选择VPDN业务模板");
+        document.modifyservice.vpdninfoid.focus();
+        return false;    
+    }
+    return true;
+}
+
+function getVpdnTemp(){
+	tunneltype.innerText='';
+	mediumtype.innerText='';
+	clientendp.innerText="";
+	serverendp.innerText="";
+	if (document.modifyservice.vpdninfoid && document.modifyservice.vpdninfoid.value != '-1000'){
+		info.innerHTML ='<font color="red">读取模板信息中，请稍等...</font>';
+		bufferFrame.document.location="/servlet/com.portal.web.PInfranetServlet?page=biz/loadVpdnTemp&Component=com.hp.web.comp.PGetVPDNTemplateBeanImpl&templateid="+document.modifyservice.vpdninfoid.value;
+	}
+}
+
+function toggleAddXVC(xvctype){
+	var isDisabled = null;
+	if(xvctype=='1' || xvctype=='4'){
+		isDisabled = '';
+	} else {
+		isDisabled = 'disabled';
+	}
+	if(document.modifyservice.addxvc != null)
+		document.modifyservice.addxvc.disabled = isDisabled;
+}
+
+</script>
+<!--当用户选择绿色上网服务的有效时间和失效时间时, change the mouse to hand -->
+<style>
+.havelink {cursor:hand }
+</style>
+<!-- -->
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" onload="load()">
+
+<form name="modifyservice"
+	action="/webkit_ui/biz/acntModifyServiceInput.jsp" method="post"
+	target="_self" onsubmit="return checkall()">
+ <input type=hidden name="Database" value="0.0.0.1"> <input
+	type=hidden name="ServiceFullName" value="/service/pppoe">
+<input type=hidden name="ServiceNo" value="218757475"> <input
+	type=hidden name="ServiceName" value="pppoe"> <input
+	type=hidden name="AccountNo" value=218757027>
+<input type=hidden name="subbandwidth" value="8192">
+
+<table border=1 cellpadding=0 cellspacing=0 width="80%"
+	bordercolor="#006699" bordercolorlight="#006699"
+	bordercolordark="#FFFFFF" align="center">
+	<tr bgcolor="#063b71">
+		<td colspan=2 nowrap class="titletype" align="center" width="100%"
+			height="28" valign="middle">服务详细信息：宽带拨号</td>
+	</tr>
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">登录名称</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				057900668955
+&nbsp;</td>
+			</tr>
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">订购产品速率</td>
+				<td bgcolor="#d1e3f5" class="inputtype">8192 kbps
+				</td>
+				<input name="bandwidth" size="10" value="8192" type="hidden"/>
+			</tr>
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">服务状态</td>
+				<td bgcolor="#d1e3f5" class="inputtype">正常</td>
+			</tr>
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">锁户类型</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				正常
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">固网接入最大会话数</td>
+				<td bgcolor="#d1e3f5" class="inputtype">				
+					2
+				<input type="hidden" name="ismax" value="1"></td>
+			</tr>
+			
+			<!-- Added by luo wu-hua on 2007/11/6 for wlan sessions and phs sessions on pppoe. -->
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">Wlan接入最大会话数</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+					0
+				<input type="hidden" name="ispppoewlanmax" value="1"></td>
+			</tr>
+			
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">Phs接入最大会话数</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+					0
+				<input type="hidden" name="ispppoephsmax" value="1"></td>
+			</tr>
+			
+			<!-- Ends addition. -->
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">计费方式</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				普通
+				</td>
+			</tr>
+			
+			<!-- modify by huanghe on 10/9/2006-->
+			
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">XVC绑定限制</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				<span id="unkownxvccontroldisplay" style="display:none">绑定方式未确定</span>
+				<span id="xvccontrolspan" >
+								
+				<select id="xvccontrol" name="xvccontrol" onchange="toggleAddXVC(this.value)"  
+					>
+					<!-- modify by huanghe on 12/26/2006 去除不绑定状态-->
+					
+					<!-- option value="0">不绑定</option -->
+					<option value="1">手工绑定</option>
+					<option value="2" selected>自动绑定</option>
+					<option value="3">自动移动绑定</option>
+					<option value="4">手工移动绑定</option>
+					
+				</select>
+				</span></span></td>
+			</tr>
+			
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">MAC绑定限制</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				不进行限制
+				</td>
+			</tr>
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">最大MAC地址绑定数限制</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				11
+				</td>
+			</tr>
+			
+			<!-- Modifyied by luo wu-hua on 2007/11/26 content: add a condition: serviceName is not pppoe.-->
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">固网接入控制</td>
+				<td bgcolor="#d1e3f5" class="inputtype">允许固网接入
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">小灵通主叫控制</td>
+				<td bgcolor="#d1e3f5" class="inputtype">禁止小灵通接入</td>
+				
+			</tr>
+			<!-- End addition. -->
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">WLAN国内漫游权限</td>
+				
+				<td bgcolor="#d1e3f5" class="inputtype">禁用WLAN漫游</td>
+			</tr>
+			
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype" align="left">WLAN国际漫游权限</td>
+				
+				<td bgcolor="#d1e3f5" class="inputtype" align="left">未开通
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">我的E家类型</td>
+				<td bgcolor="#d1e3f5" class="inputtype" nowrap="nowrap">
+					非我的E家用户
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">Wlan动态密码</td>
+				<td bgcolor="#d1e3f5" class="inputtype" nowrap="nowrap">
+					未开通
+				</td>
+			</tr>
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype">接入地址类型</td>
+				<td bgcolor="#d1e3f5" class="inputtype" nowrap="nowrap">
+				公网双栈
+				</td>
+			</tr>
+			
+
+		</table>
+		</td>
+	</tr>
+
+
+	
+	<tr bgcolor="#063b71">
+		<td colspan=2 nowrap class="titletype" align="center" width="100%"
+			height="28" valign="middle">绿色上网服务</td>
+	</tr>
+    
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr>
+				<td bgcolor="#bacfe4" class="inputtype" width="35%">是否绿色上网用户</td>
+				<td bgcolor="#d1e3f5" class="inputtype"><input type="checkbox"
+					id="isgreencheck" value="application_green" 
+					onClick="changeDisplay()" disabled/>
+					
+					</td>
+			</tr>
+
+			
+			<tr id="filtertype" style="display:none">
+				<td bgcolor="#bacfe4" class="inputtype">内容过滤类型</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				</td>
+			</tr>
+
+			<tr id="activet" style="display:none">
+				<td bgcolor="#bacfe4" class="inputtype">服务生效时间</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				</td>
+			</tr>
+
+			<tr id="expiret" style="display:none">
+				<td bgcolor="#bacfe4" class="inputtype">服务终止时间</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				</td>
+			</tr>
+
+		</table>
+		</td>
+	</tr>
+	
+
+	
+
+	<!-- added by huanghe on 2007/5/28 页面推送-->
+	<!-- >
+   <tr bgcolor="#063b71" >
+      
+        <td colspan=2 nowrap class="titletype" align="center" width="100%" height="28" valigh="middle">页面推送返回属性</td>
+        
+  </tr>
+  <tr>
+<td colspan="4">
+<table width="100%" border="0" cellspacing="2" cellpadding="2">
+  
+  <tr>
+    <td align="right" bgcolor="#bacfe4" class="inputtype">
+      <div align="left">是否白名单</div>    </td>
+    <td bgcolor="#d1e3f5" class="inputtype">
+      <select name="extattr.push.white">
+    
+      <option value="1" selected>是</option>
+      <option value="0">否</option>
+	
+	  <option value="0" selected>否</option>
+      <option value="1">是</option>
+	
+    </select>
+    </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#bacfe4" class="inputtype">
+      <div align="left">推送编号</div>    </td>
+    <td bgcolor="#d1e3f5" class="inputtype">
+      <input type="text" name="extattr.push.infoid" size="40" value="">
+    </td>
+  </tr>
+  <tr>
+     <td align="right" bgcolor="#bacfe4" class="inputtype">
+      <div align="left">过期时间</div>    </td>
+     <td bgcolor="#d1e3f5" class="inputtype">
+         <input type="text" name="extattr.push.expiredate" value="" disabled="disabled" ><span onclick="selectdate_2(document.getElementById(''),document.getElementById(''))" class="havelink">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择日期</span>
+         <input type="hidden" name="extattr.push.expire-date" value="" >
+     </td>
+  </tr>
+  
+  </table>
+  </td>
+  </tr>
+  <-->
+
+	<tr bgcolor="#063b71">
+		
+		<td colspan=2 nowrap class="titletype" align="center" width="100%"
+			height="28" valign="middle">绑定信息</td>
+		
+	</tr>
+	
+	
+	<tr>
+		<td colspan="4">
+		<table id="xvccontroltable" width="100%" border="0" cellspacing="2" cellpadding="2">
+
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype">
+				<input  
+				type="checkbox" name="xvc_1" />
+				序号1</td>
+			</tr>
+			<!-- add by huanghe on 10/9/2006-->
+			
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">NAS归属域</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype" align="left">
+				
+				<select  name="xvcdomain_1">
+					
+					<option value=JH-YW-JD-1.domain>JH-YW-JD-1.domain</option>
+					
+					<option value=JH-JH-CDXY-1.domain>JH-JH-CDXY-1.domain</option>
+					
+					<option value=JH-LX-CX-1.domain>JH-LX-CX-1.domain</option>
+					
+					<option value=JH-PJ-CZ-1.domain>JH-PJ-CZ-1.domain</option>
+					
+					<option value=JH-DY-WJ-1.domain>JH-DY-WJ-1.domain</option>
+					
+					<option value=JH-YW-BW-3.domain>JH-YW-BW-3.domain</option>
+					
+					<option value=JH-YW-CN-1.domain>JH-YW-CN-1.domain</option>
+					
+					<option value=JH-DY-HD-1.domain>JH-DY-HD-1.domain</option>
+					
+					<option value=JH-YW-BMAZQ-1.domain>JH-YW-BMAZQ-1.domain</option>
+					
+					<option value=JH-PJ-JN-1.domain>JH-PJ-JN-1.domain</option>
+					
+					<option value=JH-WY-CN-1.domain>JH-WY-CN-1.domain</option>
+					
+					<option value=JH-JH-DG-1.domain>JH-JH-DG-1.domain</option>
+					
+					<option value=JH-DY-CZ-1.domain>JH-DY-CZ-1.domain</option>
+					
+					<option value=JH-JH-JN-1.domain>JH-JH-JN-1.domain</option>
+					
+					<option value=JH-YK-GS-1.domain>JH-YK-GS-1.domain</option>
+					
+					<option value=default>default</option>
+					
+					<option value=JH-YW-BW-4.domain>JH-YW-BW-4.domain</option>
+					
+					<option value=JH-YW-CN-2.domain>JH-YW-CN-2.domain</option>
+					
+					<option value=JH-YW-JD-2.domain>JH-YW-JD-2.domain</option>
+					
+					<option value=JH-YW-JD-3.domain>JH-YW-JD-3.domain</option>
+					
+					<option value=JH-JH-CZ-1.domain>JH-JH-CZ-1.domain</option>
+					
+					<option value=JH-LX-CD-1.domain>JH-LX-CD-1.domain</option>
+					
+					<option value=JH-JH-CN-2.domain>JH-JH-CN-2.domain</option>
+					
+					<option value=JH-YK-JN-1.domain>JH-YK-JN-1.domain</option>
+					
+					<option value=JH-YW-XML-1.domain>JH-YW-XML-1.domain</option>
+					
+					<option value=JH-YK-CZ-1.domain>JH-YK-CZ-1.domain</option>
+					
+					<option value=JH-WY-CD-1.domain>JH-WY-CD-1.domain</option>
+					
+					<option value=JH-YW-BW-1.domain>JH-YW-BW-1.domain</option>
+					
+					<option value=JH-PA-CN-1.domain>JH-PA-CN-1.domain</option>
+					
+					<option value=JH-PA-CZ-1.domain>JH-PA-CZ-1.domain</option>
+					
+					<option value=JH-YW-BW-2.domain>JH-YW-BW-2.domain</option>
+					
+					<option value=JH-JH-CN-1.domain selected>JH-JH-CN-1.domain</option>
+					
+				</select>
+				
+				</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype">
+				<div align="left">XVC-XPI（请填写数字）</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				    <input type="text" name="xvcxpi_1" 
+				        size="10" value="1775">
+				        
+				        </td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype">
+				<div align="left">XVC-XCI（请填写数字）</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				    <input type="text" name="xvcxci_1" 
+				        size="10" value="429">
+				        
+				        </td>
+			</tr>
+
+		</table>
+		
+		
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype"><input
+					type="checkbox" 
+					name="macck_1">序号1</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">MAC地址</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				<input type="text"  
+					name="mac_1" size="20"
+					value=00:01:53:62:67:0b>
+					
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	
+		
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype"><input
+					type="checkbox" 
+					name="macck_2">序号2</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">MAC地址</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				<input type="text"  
+					name="mac_2" size="20"
+					value=00:16:7e:62:6f:c5>
+					
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	
+		
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype"><input
+					type="checkbox" 
+					name="macck_3">序号3</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">MAC地址</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				<input type="text"  
+					name="mac_3" size="20"
+					value=00:1b:fa:ba:87:0b>
+					
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	
+		
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype"><input
+					type="checkbox" 
+					name="macck_4">序号4</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">MAC地址</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				<input type="text"  
+					name="mac_4" size="20"
+					value=00:14:00:a0:99:1d>
+					
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	
+		
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype"><input
+					type="checkbox" 
+					name="macck_5">序号5</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">MAC地址</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				<input type="text"  
+					name="mac_5" size="20"
+					value=00:0b:ef:d0:ac:56>
+					
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	
+		
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype"><input
+					type="checkbox" 
+					name="macck_6">序号6</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">MAC地址</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				<input type="text"  
+					name="mac_6" size="20"
+					value=00:1c:ef:96:54:27>
+					
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	
+		
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype"><input
+					type="checkbox" 
+					name="macck_7">序号7</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">MAC地址</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				<input type="text"  
+					name="mac_7" size="20"
+					value=00:08:01:1d:ca:25>
+					
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	
+		
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype"><input
+					type="checkbox" 
+					name="macck_8">序号8</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">MAC地址</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				<input type="text"  
+					name="mac_8" size="20"
+					value=00:13:dd:69:ee:3a>
+					
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	
+		
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype"><input
+					type="checkbox" 
+					name="macck_9">序号9</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">MAC地址</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				<input type="text"  
+					name="mac_9" size="20"
+					value=00:0e:5e:34:4d:3a>
+					
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	
+		
+	<tr>
+		<td colspan="4">
+		<table width="100%" border="0" cellspacing="2" cellpadding="2">
+			<tr bgcolor="#063b71">
+				<td colspan=2 align="left" bgcolor="#bacfe4" class="inputtype"><input
+					type="checkbox" 
+					name="macck_10">序号10</td>
+			</tr>
+			<tr>
+				<td align="right" bgcolor="#bacfe4" class="inputtype" width="35%">
+				<div align="left">MAC地址</div>
+				</td>
+				<td bgcolor="#d1e3f5" class="inputtype">
+				
+				<input type="text"  
+					name="mac_10" size="20"
+					value=00:08:13:29:d1:16>
+					
+					</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+	
+	
+	<tr bgcolor="#063b71">
+		
+		<td colspan=2 nowrap class="titletype" align="center" width="100%"
+			height="28" valigh="middle">主叫限制信息</td>
+		
+	</tr>
+	
+	
+	
+	<tr bgcolor="#bacfe4">
+		<td colspan=2 class="buttontype" align="center" height="34"
+			valign="middle">
+		<input type="hidden" name="xvcitemno" value="1">
+		<input type="hidden" name="macitemno" value="10">
+		<input type="hidden" name="cliditemno" value="0">
+		<input type="hidden" name="how" value="modify"> <!-- added by huanghe on 5/15/2007 用户自定义返回属性-->
+		<!-- add by huanghe on 2007/5/28 页面推送--> 
+		<!-- >
+    <input type="button" name="addpush" value="增加页面推送属性" onclick="add_attr('')">
+    <-->  <!-- -->  
+		<input type="button" name="deletexvc" value="删除选定的绑定信息"
+			onclick="delete_xvc()" >  
+		<input type="button" name="addxvc" value="增加绑定信息"
+			onclick="add_xvc('1',1)" disabled="disabled"/>
+  <input
+			type="button" name="deletemac" value="删除选定的MAC绑定"
+			onclick="delete_mac()" >  
+		<input type="button" name="addmac" value="增加MAC绑定"
+			onclick="add_mac('10')" >    <input
+			name="addHotspot" value="增加热点" onclick="add_hotspot()" type="button">
+		<input name="deleteHotspot" value="删除选中的热点" type="button"
+			onclick="deleteBindedHotspot()"> <input type="submit"
+			name="modify" value="修改"> <input type="reset" name="reset"
+			value="重新填写">  <input type="reset" name="back"
+			value="返回" onclick="back_detail()"> 
+		</td>
+	</tr>
+</table>
+<input name="xtoken" type="hidden" value="p+8/zs4HI0Qxe87LEfh4wxL2k/oOKRmmR9WSnjk1E5uBhnLarmYKgedGH7A0BZeMtcKKnP59VpT5j4OGIWx+wA=="/>
+</form>
+<iframe id="bufferFrame" name="bufferFrame" width="0" height="0" src=""
+	frameborder=no></iframe>
+</body>
+</html>
+
+<script type='text/javascript'
+	src='/webkit_ui/util.js'> </script>
+<script language="javascript">
+function back_detail() {
+    window.modifyservice.action="/servlet/com.portal.web.PInfranetServlet?page=biz/acntDetail&Component=com.hp.web.comp.PGetAccountInfoBeanImpl&accountno="+218757027+"&loadBean=yes";
+    window.modifyservice.submit();
+}
+
+function commit_xvcadd(itemno,xvcxpi,xvcxci,xvcdomain) {
+   	//add by huanghe on 12/19/2006
+	if(document.modifyservice.maxsessions != undefined){
+		var maxsessions = document.modifyservice.maxsessions.value;
+		if(maxsessions == "无限制"){
+			document.modifyservice.maxsessions.value = -1;
+		}
+	}
+    
+    var wrong = 0;
+    
+    if (itemno==1) wrong = 1;
+    
+    if(wrong==1) {
+        alert("你输入的绑定序号重复了！请重试！");
+        return;
+    }
+    window.modifyservice.xvcitemno.value=parseInt(window.modifyservice.xvcitemno.value)+1;
+    window.modifyservice.action="/webkit_ui/biz/acntModifyServiceInput.jsp?itemno="+itemno+"&xvcxpi_"+itemno+"="+xvcxpi+"&xvcxci_"+itemno+"="+xvcxci+"&xvcdomain_"+itemno+"="+xvcdomain;
+    if(document.modifyservice.ismax.value=="1") {
+		if(document.modifyservice.maxsessions != undefined) {
+	        if(isNaN(document.modifyservice.maxsessions.value)) {
+	            alert("最大在线数请输入数字");
+	            document.modifyservice.maxsessions.focus();
+	            return false;
+	        }
+		}
+    }
+    //add by huanghe on 12/19/2006
+    if(!check())
+    	return false;
+    
+    window.modifyservice.submit();
+}
+
+//added by huanghe on 5/15/2007 用户自定义返回属性
+function commit_iptvadd(attr_name,attr_value) {
+	if(document.modifyservice.maxsessions != undefined){
+		var maxsessions = document.modifyservice.maxsessions.value;
+		if(maxsessions == "无限制"){
+			document.modifyservice.maxsessions.value = -1;
+		}
+	}
+    
+    var entryname = "extattr.iptv."+attr_name;
+    window.modifyservice.action="/webkit_ui/biz/acntModifyServiceInput.jsp?"+entryname+"="+attr_value;
+    if(document.modifyservice.ismax.value=="1") {
+        if(document.modifyservice.maxsessions != undefined) {
+	        if(isNaN(document.modifyservice.maxsessions.value)) {
+	            alert("最大在线数请输入数字");
+	            document.modifyservice.maxsessions.focus();
+	            return false;
+	        }
+        }
+    }
+
+    if(!check())
+    	return false;
+    
+    window.modifyservice.submit();
+}
+
+function checkall(){
+   
+    
+    //Added by luo wu-hua on 2007/11/27 for validating phone data format.
+    
+    //End addtion.
+    
+    
+	if("pppoe"=="pppoe" && !checkadd_xvc(1,1)){
+		return false;
+	}
+	
+	//Added by luo wu-hua on 2008/1/25.
+	//如果wlan访问权限为热点绑定, 那么热点列表不能为空.
+	if ("true" == "true" && "true" == "true"
+	    && 0 == 5) {
+	    alert("wlan访问权限为热点绑定, 至少要绑定一个热点, 请添加热点!");
+	    return false;
+    }
+	//End addition.
+	
+	
+	//Added by luo wu-hua on 2010/1/08.
+	//domain不能为空
+	var domainName;
+	
+	
+		domainName = "xvcdomain_" + "1";
+		var domainSelect = document.getElementById(domainName);
+		if (domainSelect != undefined && domainSelect.value == '') {
+		    alert( '绑定信息中序号' + "1" + '对应的domain已经不存在，必须修改');
+		    return false;
+		}
+	
+	//End addition.
+
+	return check();
+}
+
+
+function checkadd_xvc(maxnum, xvcNum){
+
+	var addwindow;
+	var optionvalue;
+
+	if(document.getElementById('xvccontrol') !=undefined){
+		for(var i = 0;i < document.getElementById('xvccontrol').options.length; i++){  
+        	if(document.getElementById('xvccontrol').options[i].selected  ==  true){
+        		optionvalue = document.getElementById('xvccontrol').options[i].value;
+        	}
+    	}
+   
+    	//add by huanghe on 11/28/2006 for 自动移机绑定
+    	if(maxnum <= 0 && (optionvalue=="3" || optionvalue=="4")){
+    		alert("绑定列表为空，不能更改为移机绑定!");
+    		return false;
+    	}
+    
+    	//add by huanghe on 12/25/2006 for 手工移机绑定
+    	var parentid = 57900;
+    	
+    	if("pppoe"=="pppoe" && optionvalue == "4" && optionvalue != "2"){
+    		if(confirm("手工移机绑定需要指定新绑定列表，请输入一条XVC参数！")){ 
+				addwindow=window.open("../webkit_ui/biz/acntAddPvc.jsp?itemno="+maxnum+"&parent_id="+parentid,"add_xvc","toolbar=0,menubar=0,scrollbars=0,resizable=0,width=500,height=400");
+    			addwindow.opener=window;
+    			return false;
+    		}
+    		else
+    			return false;
+    	}
+       
+		if(maxnum <= 0 && optionvalue=="1"){
+			if(confirm("手工绑定状态XVC列表不能为空，请输入一条XVC参数！")){ 
+				addwindow=window.open("../webkit_ui/biz/acntAddPvc.jsp?itemno="+maxnum+"&parent_id="+parentid,"add_xvc","toolbar=0,menubar=0,scrollbars=0,resizable=0,width=500,height=400");
+    			addwindow.opener=window;
+    			return false;
+    		}
+    		else
+    			return false;
+		}
+
+		if(xvcNum>1 && optionvalue=="1") {
+			alert('手工绑定只允许绑定一条XVC参数');
+			return false;
+		}
+
+		//add by huanghe on 12/7/2006 xci,xpi值有效性检查
+		if(maxnum > 0){
+
+			
+			    
+				var xcicontrolname = "xvcxci_1";
+				var xpicontrolname = "xvcxpi_1";
+				
+	
+				var xpivalue = document.getElementById(xpicontrolname).value;
+				var xcivalue = document.getElementById(xcicontrolname).value;
+				if(isNaN(xpivalue) || isNaN(xcivalue) || xpivalue=="" || xcivalue==""){
+    				alert("XPI,XCI值必须为数字!");
+    				return false;
+    			}
+    			if(xpivalue >= 4096 || xcivalue >= 65536 || xpivalue < 0 || xcivalue < 0){
+    				alert("XVC绑定参数不在允许范围内!");
+    				return false;
+    			}
+			
+		}
+	}
+	return true; 
+}
+
+function commit_macadd(itemno,macadd) {   
+    var wrong = 0;
+    
+    //modify by huanghe on 2/26/2007 修正数组越界bug
+    if (itemno==1) wrong = 1;
+    
+    //modify by huanghe on 2/26/2007 修正数组越界bug
+    if (itemno==2) wrong = 1;
+    
+    //modify by huanghe on 2/26/2007 修正数组越界bug
+    if (itemno==3) wrong = 1;
+    
+    //modify by huanghe on 2/26/2007 修正数组越界bug
+    if (itemno==4) wrong = 1;
+    
+    //modify by huanghe on 2/26/2007 修正数组越界bug
+    if (itemno==5) wrong = 1;
+    
+    //modify by huanghe on 2/26/2007 修正数组越界bug
+    if (itemno==6) wrong = 1;
+    
+    //modify by huanghe on 2/26/2007 修正数组越界bug
+    if (itemno==7) wrong = 1;
+    
+    //modify by huanghe on 2/26/2007 修正数组越界bug
+    if (itemno==8) wrong = 1;
+    
+    //modify by huanghe on 2/26/2007 修正数组越界bug
+    if (itemno==9) wrong = 1;
+    
+    //modify by huanghe on 2/26/2007 修正数组越界bug
+    if (itemno==10) wrong = 1;
+    
+    if(wrong==1) {
+        alert("你输入的绑定序号重复了！请重试！");
+        return;
+    }
+    
+    if (macadd=="00:01:53:62:67:0b") {
+        alert("你输入的MAC地址重复了！请重试！");
+        return;
+    }
+    
+    if (macadd=="00:16:7e:62:6f:c5") {
+        alert("你输入的MAC地址重复了！请重试！");
+        return;
+    }
+    
+    if (macadd=="00:1b:fa:ba:87:0b") {
+        alert("你输入的MAC地址重复了！请重试！");
+        return;
+    }
+    
+    if (macadd=="00:14:00:a0:99:1d") {
+        alert("你输入的MAC地址重复了！请重试！");
+        return;
+    }
+    
+    if (macadd=="00:0b:ef:d0:ac:56") {
+        alert("你输入的MAC地址重复了！请重试！");
+        return;
+    }
+    
+    if (macadd=="00:1c:ef:96:54:27") {
+        alert("你输入的MAC地址重复了！请重试！");
+        return;
+    }
+    
+    if (macadd=="00:08:01:1d:ca:25") {
+        alert("你输入的MAC地址重复了！请重试！");
+        return;
+    }
+    
+    if (macadd=="00:13:dd:69:ee:3a") {
+        alert("你输入的MAC地址重复了！请重试！");
+        return;
+    }
+    
+    if (macadd=="00:0e:5e:34:4d:3a") {
+        alert("你输入的MAC地址重复了！请重试！");
+        return;
+    }
+    
+    if (macadd=="00:08:13:29:d1:16") {
+        alert("你输入的MAC地址重复了！请重试！");
+        return;
+    }
+    
+    window.modifyservice.macitemno.value=parseInt(window.modifyservice.macitemno.value)+1;
+    if(window.modifyservice.maccontrol != undefined)
+    	window.modifyservice.maccontrol.value="1" ;
+    window.modifyservice.action="/webkit_ui/biz/acntModifyServiceInput.jsp?itemno3="+itemno+"&mac_"+itemno+"="+macadd;
+    //Checks data format.
+    //Modified by luo wu-hua on 2008/08/19.
+    //if(document.modifyservice.ismax.value=="1") {
+        //if(isNaN(document.modifyservice.maxsessions.value)) {
+           // alert("最大在线数请输入数字");
+            //document.modifyservice.maxsessions.focus();
+            //return false;
+        //}
+    //}
+    if(check() == true) {
+        window.modifyservice.submit();
+    }
+    //End modification.
+}
+
+function commit_hotspotadd(hotspotPoidIndexValue) {
+    
+
+    
+	if("pppoe"=="pppoe" && !checkadd_xvc(1,1)){
+		return false;
+	}
+	
+	if (check() == true) {
+		
+		window.modifyservice.action="/webkit_ui/biz/acntModifyServiceInput.jsp?forbidHotspot=&forbidHotspotGrp=&hotspotPoidIndexValue="+hotspotPoidIndexValue;
+        window.modifyservice.submit();
+	}
+    
+}
+
+function  delete_xvc() {
+    //add by huanghe on 12/19/2006
+	if(document.modifyservice.maxsessions != undefined){
+		var maxsessions = document.modifyservice.maxsessions.value;
+		if(maxsessions == "无限制"){
+			document.modifyservice.maxsessions.value = -1;
+		}
+	}
+	
+	//add by huanghe on 12/15/2006
+    if(!check())
+    	return false;
+    
+    //add by huanghe on 10/9/2006
+    
+	var jj ;
+	var xvcnum ;
+	var xvcdelnum ;
+	xvcnum = 0 ;
+	xvcdelnum = 0 ;
+	jj = 0
+	for(; jj < document.forms[0].elements.length; jj++)
+	{
+		var formObj=document.forms[0].elements[jj];
+        if((formObj.type.toLowerCase() == "checkbox") && (formObj.name.substring(0,4) == "xvc_"))
+        {
+        	xvcnum ++ ;
+        	if (formObj.checked == true)
+        		xvcdelnum ++ ;
+        }
+	}
+	
+	var optionvalue;
+	if(document.getElementById('xvccontrol') !=undefined){
+		for(var i = 0;i < document.getElementById('xvccontrol').options.length; i++){  
+        	if(document.getElementById('xvccontrol').options[i].selected  ==  true){
+        		optionvalue = document.getElementById('xvccontrol').options[i].value;
+        	}
+    	}
+    } else {
+		optionvalue = document.getElementById('xvccontrolvaluespan').value;
+	}
+	
+	if ((xvcnum - xvcdelnum) <= 0 && (optionvalue == "1" || optionvalue == "4"))
+	{
+		alert("必须保留XVC绑定信息，请检查相关的操作！") ;
+		return false ;
+	}
+   
+    if(confirm("确定要删除XVC信息吗？")) {
+            window.modifyservice.how.value="deletexvc";
+            
+            window.modifyservice.submit();
+    }
+}
+
+//added by huanghe on 5/15/2007 用户自定义返回属性
+function  delete_attr(ctgname) {
+	if(document.modifyservice.maxsessions != undefined){
+		var maxsessions = document.modifyservice.maxsessions.value;
+		if(maxsessions == "无限制"){
+			document.modifyservice.maxsessions.value = -1;
+		}
+	}
+	
+    if(!check())
+    	return false;
+    
+    if(confirm("确定要删除IPTV返回属性信息吗？")) {
+    		var howname = "delete" + ctgname;
+            window.modifyservice.how.value=howname;
+            
+            window.modifyservice.submit();
+    }
+}
+//added by huanghe on 5/15/2007 ended
+
+function  delete_mac() {
+    //add by huanghe on 12/19/2006
+	if(document.modifyservice.maxsessions != undefined){
+		var maxsessions = document.modifyservice.maxsessions.value;
+		if(maxsessions == "无限制"){
+			document.modifyservice.maxsessions.value = -1;
+		}
+	}
+	
+	//add by huanghe on 12/15/2006
+    if(!check())
+    	return false;
+    	
+    if(confirm("确定要删除MAC绑定信息吗？")) {
+            window.modifyservice.how.value="deletemac";
+            
+            window.modifyservice.submit();
+    }
+}
+
+
+function load(){
+	
+	if (document.modifyservice.vpdninfoid && document.modifyservice.vpdninfoid.value != '-1000')	
+		getVpdnTemp();
+}
+//删除已绑定的热点
+function deleteBindedHotspot() {
+    if ('0' == '1' && 0==0) {
+        alert('当前Wlan漫游权限为热点绑定, 删除热点时, 至少要保留一个热点!');
+    } else {
+        if(document.modifyservice.bindedHotspots.value.indexOf('_') == -1) {
+            alert('不支持删除热点组');
+        } else if (check()== true && confirm('确定删除热点:' + document.modifyservice.bindedHotspots.options[document.modifyservice.bindedHotspots.selectedIndex].text + ' ?')) {
+            
+            window.modifyservice.how.value="deleteBindedHotspot";
+            window.modifyservice.action="/webkit_ui/biz/acntModifyServiceInput.jsp";
+            window.modifyservice.submit();
+        }
+    }
+    
+}
+//设置添加热点button的可见性
+function setAddHotspotButtonVisible(serviceName, accesspermit) {
+
+    if (serviceName == "pppoe" && accesspermit == "5") {
+        document.all.addHotspot.disabled = false;
+    } else {
+        document.all.addHotspot.disabled = true;
+    }
+}
+setAddHotspotButtonVisible("pppoe", 0);
+
+//设置删除热点button的可见性
+function setDeleteHotspotButtonVisible(serviceName, accesspermit, isExistHotspot) {
+    if (serviceName == "pppoe" && accesspermit == "5" && isExistHotspot == "true") {
+         document.all.deleteHotspot.disabled = false;
+    } else {
+         document.all.deleteHotspot.disabled = true;
+    }
+}
+setDeleteHotspotButtonVisible("pppoe", 0, "false");
+</script>
+<!-- modify by huanghe on 10/9/2006-->
+
+
+
+
+
